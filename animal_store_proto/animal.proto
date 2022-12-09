@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package animal_store_proto;
+
+option go_package = "./animal_store_proto";
+import "animal_store_proto/common.proto";
+import "google/protobuf/wrappers.proto";
+import "validate/validate.proto";
+import "google/protobuf/struct.proto";
+
+message AnimalReq { 
+  string animalId = 1 [json_name = "animalId", (validate.rules).string.min_len = 1]; 
+}
+
+message AnimalRsp { 
+  google.protobuf.Int32Value animalId = 1 [json_name = "animalId"]; 
+  google.protobuf.StringValue animal = 2 [json_name = "animal"]; 
+  google.protobuf.Int32Value price = 3 [json_name = "price"];  
+}

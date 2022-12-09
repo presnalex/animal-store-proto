@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package animal_store_proto;
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "google/protobuf/empty.proto";
+import "animal_store_proto/animal.proto";
+
+option go_package = "./animal_store_proto";
+
+service AnimalStoreService {
+    rpc GetAnimal(AnimalReq) returns (AnimalRsp) {
+        option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+            operation_id: "Animal";
+            responses: {
+              key: "default";
+              value: {
+                description: "Error response";
+                schema: {
+                  json_schema: {
+                    ref: ".animal_store_proto.ErrorRsp";
+                  }
+                }
+              }
+            }
+          };
+          option (google.api.http) = {
+            get: "/animal-store/v1/getAnimal";
+          }; 
+    };
+}

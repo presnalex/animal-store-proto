@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package animal_store_proto;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./animal_store_proto";
+
+message ErrorRsp {
+    Error error = 1 [json_name="error"];
+}
+
+message Error {
+    string code = 1 [json_name="code"];
+    string title = 2 [json_name="title"];
+    string uuid = 3 [json_name="uuid"];
+    string details = 4 [json_name="details"];
+}
