@@ -13,6 +13,7 @@ RUN go mod init proto && \
     go install github.com/srikrsna/protoc-gen-gotag@v0.5.0 && \
     go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger@v1.14.3 && \
     go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@v1.14.3 && \
+    go get go.unistack.org/micro/v3@v3.10.10 && \
     go get google.golang.org/grpc@v1.28.0 && \
     go get github.com/google/googleapis@v0.0.0-20200324113624-36c0febd0fa7 && \
     go get github.com/grpc-ecosystem/grpc-gateway@v1.14.3 && \
