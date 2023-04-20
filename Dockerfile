@@ -16,7 +16,7 @@ RUN go mod init proto && \
     go get google.golang.org/grpc@v1.28.0 && \
     go get github.com/google/googleapis@v0.0.0-20200324113624-36c0febd0fa7 && \
     go get github.com/grpc-ecosystem/grpc-gateway@v1.14.3 && \
-    go get github.com/presnalex/protoc-gen-micro@v0.0.1 && \
+    go get github.com/presnalex/protoc-gen-micro@v0.0.2 && \
     go get github.com/go-bindata/go-bindata/...
 
 CMD rm -rf python && mkdir python && rm -rf go && mkdir go && \

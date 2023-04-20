@@ -14,9 +14,9 @@ import (
 
 import (
 	context "context"
-	api "github.com/unistack-org/micro/v3/api"
-	client "github.com/unistack-org/micro/v3/client"
-	server "github.com/unistack-org/micro/v3/server"
+	api "go.unistack.org/micro/v3/api"
+	client "go.unistack.org/micro/v3/client"
+	server "go.unistack.org/micro/v3/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
