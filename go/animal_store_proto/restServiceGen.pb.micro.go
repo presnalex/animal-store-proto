@@ -52,7 +52,7 @@ func NewAnimalStoreServiceEndpoints() []*api.Endpoint {
 // Client API for AnimalStoreService service
 
 type AnimalStoreService interface {
-	GetAnimal(ctx context.Context, req *AnimalReq, opts ...client.CallOption) (*AnimalRsp, error)
+	GetAnimal(ctx context.Context, in *AnimalReq, opts ...client.CallOption) (*AnimalRsp, error)
 }
 
 type animalStoreService struct {
@@ -67,13 +67,14 @@ func NewAnimalStoreService(name string, c client.Client) AnimalStoreService {
 	}
 }
 
-func (c *animalStoreService) GetAnimal(ctx context.Context, req *AnimalReq, opts ...client.CallOption) (*AnimalRsp, error) {
-	rsp := &AnimalRsp{}
-	err := c.c.Call(ctx, c.c.NewRequest(c.name, "AnimalStoreService.GetAnimal", req), rsp, opts...)
+func (c *animalStoreService) GetAnimal(ctx context.Context, in *AnimalReq, opts ...client.CallOption) (*AnimalRsp, error) {
+	req := c.c.NewRequest(c.name, "AnimalStoreService.GetAnimal", in)
+	out := new(AnimalRsp)
+	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return rsp, nil
+	return out, nil
 }
 
 // Server API for AnimalStoreService service
@@ -84,7 +85,7 @@ type AnimalStoreServiceHandler interface {
 
 func RegisterAnimalStoreServiceHandler(s server.Server, hdlr AnimalStoreServiceHandler, opts ...server.HandlerOption) error {
 	type animalStoreService interface {
-		GetAnimal(ctx context.Context, req *AnimalReq, rsp *AnimalRsp) error
+		GetAnimal(ctx context.Context, in *AnimalReq, out *AnimalRsp) error
 	}
 	type AnimalStoreService struct {
 		animalStoreService
@@ -103,6 +104,6 @@ type animalStoreServiceHandler struct {
 	AnimalStoreServiceHandler
 }
 
-func (h *animalStoreServiceHandler) GetAnimal(ctx context.Context, req *AnimalReq, rsp *AnimalRsp) error {
-	return h.AnimalStoreServiceHandler.GetAnimal(ctx, req, rsp)
+func (h *animalStoreServiceHandler) GetAnimal(ctx context.Context, in *AnimalReq, out *AnimalRsp) error {
+	return h.AnimalStoreServiceHandler.GetAnimal(ctx, in, out)
 }

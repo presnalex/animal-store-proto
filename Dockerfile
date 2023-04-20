@@ -1,4 +1,4 @@
-FROM golang:1.13.8-buster
+FROM golang:1.17.12-buster
 
 RUN mkdir /build
 WORKDIR /build
@@ -8,15 +8,15 @@ COPY --from=swaggerapi/swagger-ui /usr/share/nginx/html/ /swagger-ui/
 RUN apt-get update && apt-get -y install --no-install-recommends protobuf-compiler-grpc python3-grpc-tools libprotobuf-dev protobuf-compiler python3-pip python3-dev python3-setuptools  && rm -rf /var/lib/apt/lists/*
 
 RUN go mod init proto && \
-    go get github.com/envoyproxy/protoc-gen-validate@v0.3.0-java && \
-    go get google.golang.org/protobuf/cmd/protoc-gen-go && \
+    go install github.com/envoyproxy/protoc-gen-validate@v0.3.0-java && \
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
+    go install github.com/srikrsna/protoc-gen-gotag@v0.5.0 && \
+    go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger@v1.14.3 && \
+    go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@v1.14.3 && \
     go get google.golang.org/grpc@v1.28.0 && \
     go get github.com/google/googleapis@v0.0.0-20200324113624-36c0febd0fa7 && \
     go get github.com/grpc-ecosystem/grpc-gateway@v1.14.3 && \
-    go get github.com/srikrsna/protoc-gen-gotag@v0.5.0 && \
-    go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger && \
-    go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway && \
-    go get github.com/unistack-org/micro/v3/cmd/protoc-gen-micro@v3.0.0-gamma.0.20201012090909-6e43ae719076 && \
+    go get github.com/presnalex/protoc-gen-micro@v0.0.1 && \
     go get github.com/go-bindata/go-bindata/...
 
 CMD rm -rf python && mkdir python && rm -rf go && mkdir go && \
